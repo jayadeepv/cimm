@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crime Information Management System</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        #login-container, #home {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 500px; /* Increased width for better layout */
+            text-align: center;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #5592B8;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #5592B8;
+        }
+
+        #home-headers {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 20px;
+        }
+
+        .section {
+            margin-bottom: 10px;
+        }
+
+        #section-content img {
+            max-width: 100%;
+            height: auto;
+            margin-bottom: 10px;
+        }
+
+        #section-content div {
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+
+<div id="login-container">
+    <h2>Crime Information Management System</h2>
+    <form id="login-form">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required>
+
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required>
+
+        <button type="button" onclick="login()">Login</button>
+    </form>
+</div>
+
+<div id="home" style="display:none;">
+    <h2>Welcome to the Crime Information Management System</h2>
+    <div id="home-headers">
+        <button class="section" onclick="showSection('reportCrime')">Report Crime</button>
+        <button class="section" onclick="showSection('missingDetails')">Missing Details</button>
+        <button class="section" onclick="showSection('mostWanted')">Most Wanted</button>
+        <button class="section" onclick="showSection('latestNews')">Latest News</button>
+    </div>
+    <div id="section-content">
+        <!-- Content for each section goes here -->
+    </div>
+</div>
+<script>
+    function login() {
+        // In a real-world scenario, you'd perform authentication here
+        // For the sake of this example, let's assume the login is successful
+        var username = document.getElementById("username").value;
+        var password = document.getElementById("password").value;
+        // Add your authentication logic here - validate the username and password
+        // For simplicity, let's assume the login is successful
+        if (username === "username" && password === "your") {
+            // Hide the login form
+            document.getElementById("login-container").style.display = "none";
+            // Show the home page
+            document.getElementById("home").style.display = "block";
+        } else {
+            alert("Invalid username or password. Please try again.");
+        }
+    }
+
+    function showSection(sectionId) {
+        // Clear previous content
+        document.getElementById("section-content").innerHTML = "";
+
+        switch (sectionId) {
+            case 'reportCrime':
+                showReportCrime();
+                break;
+            case 'missingDetails':
+                showMissingDetails();
+                break;
+            case 'mostWanted':
+                showMostWanted();
+                break;
+            case 'latestNews':
+                showLatestNews();
+                break;
+            default:
+                break;
+        }
+    }
+
+    function showReportCrime() {
+        var reportCrimeContent = document.getElementById("section-content");
+        reportCrimeContent.innerHTML = `
+            <label for="crimeType">Crime Type:</label>
+            <select id="crimeType" name="crimeType">
+                <option value="theft">Theft</option>
+                <option value="assault">Assault</option>
+                <option value="fraud">Fraud</option>
+                <option value="murder">Murder</option>
+                <option value="other">Other</option>
+                <!-- Add more crime types as needed -->
+            </select>
+
+            <label for="crimeDescription">Crime Description:</label>
+            
+             <input type="text" id="location" name="location">
+            <label for="location">Location:</label>
+            <input type="text" id="location" name="location">
+
+            <label for="dateTime">Date & Time:</label>
+            <input type="datetime-local" id="dateTime" name="dateTime">
+
+            <label for="image">Upload Image:</label>
+            <input type="file" id="image" name="image" accept="image/*">
+
+            <button type="button" onclick="submitReport()">Submit</button>
+        `;
+    }
+
+    function showMissingDetails() {
+        var missingDetailsContent = document.getElementById("section-content");
+        missingDetailsContent.innerHTML = `
+            <div>
+                <img src="person1.jpg" alt="Person 1">
+                <p>Name: John Doe</p>
+                <p>Age: 30</p>
+                <p>Phone Number: 123-456-7890</p>
+                <p>Missing Location: City XYZ</p>
+            </div>
+
+            <div>
+                <img src="person2.jpg" alt="Person 2">
+                <p>Name: Jane Doe</p>
+                <p>Age: 25</p>
+                <p>Phone Number: 987-654-3210</p>
+                <p>Missing Location: City ABC</p>
+            </div>
+
+            <!-- Add more missing persons as needed -->
+        `;
+    }
+
+    function showMostWanted() {
+        var mostWantedContent = document.getElementById("section-content");
+        mostWantedContent.innerHTML = `
+            <div>
+                <img src="criminal1.jpg" alt="Criminal 1">
+                <p>Name: Notorious Criminal 1</p>
+            </div>
+
+            <div>
+                <img src="criminal2.jpg" alt="Criminal 2">
+                <p>Name: Infamous Criminal 2</p>
+            </div>
+
+            <!-- Add more most wanted criminals as needed -->
+        `;
+    }
+
+    function showLatestNews() {
+        var latestNewsContent = document.getElementById("section-content");
+        latestNewsContent.innerHTML = `
+            <p>Recent Missing Information:</p>
+            <div>
+                <img src="person3.jpg" alt="Person 3">
+                <p>Name: Unknown Person 3</p>
+                <p>Age: Unknown</p>
+                <p>Missing Location: Unknown City</p>
+            </div>
+
+            <p>Recent Accidents:</p>
+            <div>
+            <img src="accident 1.jpg" alt="Accident 1">
+                <p>Accident 1 Details...</p>
+            </div>
+
+            <div>
+            <img src="accident 2.jpg" alt="Accident 2">
+                <p>Accident 2 Details...</p>
+            </div>
+            
+            <!-- Add more recent crime information and accidents as needed -->
+        `;
+    }
+
+    function submitReport() {
+        // Implement logic to submit the crime report
+        alert("Crime report submitted successfully!");
+    }
+</script>
+
+</body>
+</html>
